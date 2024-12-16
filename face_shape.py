@@ -67,7 +67,7 @@ def predict_image(image_file, model, class_labels):
 
 # Gợi ý kiểu tóc
 def suggest_hairstyles(face_shape):
-    base_url = 'https://github.com/PKTuanK29/Face_shape/tree/main/Images'
+    base_url = "https://github.com/PKTuanK29/Face_shape/tree/main/Images"
     suggestions = {
         'Heart': [
             (f"{base_url}heart1.jpg", "Tóc dài xoăn lơi"),
