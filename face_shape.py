@@ -236,4 +236,4 @@ elif input_method == "Chụp ảnh từ camera":
                         </div>
                         """,
                         unsafe_allow_html=True,
-                    ) 
+                    )
