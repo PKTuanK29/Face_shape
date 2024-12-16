@@ -31,7 +31,7 @@ st.markdown(
 # Hàm tải mô hình, sử dụng cache
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model(r"C:\Users\HP\Downloads\MyModel.keras")
+    return tf.keras.models.load_model(r'MyModel.keras')
 
 # Tải mô hình một lần khi ứng dụng bắt đầu
 model = load_model()
@@ -128,6 +128,31 @@ if input_method == "Tải ảnh từ máy tính":
             """,
             unsafe_allow_html=True,
         )
+        # Phần hiển thị đồ thị dự đoán
+        st.subheader("Đồ thị dự đoán")
+        fig, ax = plt.subplots(figsize=(8, 6))  # Tăng kích thước biểu đồ
+        
+        # Tùy chỉnh màu sắc gradient
+        colors = ['#5A4FCF', '#7A6FE1', '#A19BE8', '#C0BBF2', '#E4E2F7']
+        bars = ax.barh(class_labels, predictions[0], color=colors, edgecolor="none", height=0.3)
+        
+        # Hiển thị xác suất trên thanh
+        for bar, value in zip(bars, predictions[0]):
+            ax.text(value + 0.01, bar.get_y() + bar.get_height()/2, f'{value*100:.2f}%', 
+                    va='center', ha='left', fontsize=10, color='black')
+        
+        # Tùy chỉnh trục và layout
+        ax.invert_yaxis()  # Đảo ngược thứ tự trục Y
+        ax.set_xticks([])  # Ẩn trục X
+        ax.set_yticks(range(len(class_labels)))
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_visible(False)
+        ax.spines['bottom'].set_visible(False)
+        ax.set_title("Dự đoán xác suất của từng lớp", fontsize=14, fontweight='bold', pad=10)
+        
+        st.pyplot(fig)
+
 
         # Hiển thị gợi ý kiểu tóc
         st.subheader("Gợi ý kiểu tóc phù hợp")
@@ -170,6 +195,30 @@ elif input_method == "Chụp ảnh từ camera":
             """,
             unsafe_allow_html=True,
         )
+        # Phần hiển thị đồ thị dự đoán
+        st.subheader("Đồ thị dự đoán")
+        fig, ax = plt.subplots(figsize=(8, 6))  # Tăng kích thước biểu đồ
+        
+        # Tùy chỉnh màu sắc gradient
+        colors = ['#5A4FCF', '#7A6FE1', '#A19BE8', '#C0BBF2', '#E4E2F7']
+        bars = ax.barh(class_labels, predictions[0], color=colors, edgecolor="none", height=0.3)
+        
+        # Hiển thị xác suất trên thanh
+        for bar, value in zip(bars, predictions[0]):
+            ax.text(value + 0.01, bar.get_y() + bar.get_height()/2, f'{value*100:.2f}%', 
+                    va='center', ha='left', fontsize=10, color='black')
+        
+        # Tùy chỉnh trục và layout
+        ax.invert_yaxis()  # Đảo ngược thứ tự trục Y
+        ax.set_xticks([])  # Ẩn trục X
+        ax.set_yticks(range(len(class_labels)))
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_visible(False)
+        ax.spines['bottom'].set_visible(False)
+        ax.set_title("Dự đoán xác suất của từng lớp", fontsize=14, fontweight='bold', pad=10)
+        
+        st.pyplot(fig)
 
         # Hiển thị gợi ý kiểu tóc
         st.subheader("Gợi ý kiểu tóc phù hợp")
